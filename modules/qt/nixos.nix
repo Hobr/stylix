@@ -26,17 +26,7 @@ in
       inherit (config.services.desktopManager) gnome plasma6;
     in
     lib.mkIf (config.stylix.enable && config.stylix.targets.qt.enable) {
-      stylix.targets.qt.platform =
-        if gnome.enable && !(plasma6.enable || lxqt.enable) then
-          "gnome"
-        else if !(gnome.enable || plasma6.enable || lxqt.enable) then
-          "kde"
-        else if plasma6.enable && !(gnome.enable || lxqt.enable) then
-          "kde6"
-        else if lxqt.enable && !(gnome.enable || plasma6.enable) then
-          "lxqt"
-        else
-          "qtct";
+      stylix.targets.qt.platform = "qtct";
       qt = {
         enable = true;
         style = recommendedStyle."${config.qt.platformTheme}" or null;
